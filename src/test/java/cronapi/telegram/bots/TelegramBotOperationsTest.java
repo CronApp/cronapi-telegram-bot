@@ -23,9 +23,25 @@ public class TelegramBotOperationsTest {
     private static ObjectMapper OBJECT_MAPPER;
     private List<Update> updates;
 
+    public static void main(String[] args) throws InterruptedException {
+
+        token = System.getProperty("token");
+        GetUpdates param = new GetUpdates();
+        param.setToken(token);
+        String sessionId = TelegramBotOperations.startBotSession(param, updateVar -> {
+            Update update = updateVar.getTypedObject(Update.class);
+            SendMessage sendMessageParam = new SendMessage();
+            sendMessageParam.setToken(token);
+            sendMessageParam.setChatId(update.getMessage().getChat().getId().toString());
+            sendMessageParam.setText("Echoing " + update.getMessage().getText());
+            Message message = TelegramBotOperations.sendMessage(sendMessageParam);
+        });
+        Thread.sleep(5 * 60 * 1000);
+        TelegramBotOperations.stopBotSession(sessionId);
+    }
+
     @BeforeClass
-    public static void BeforeClass()
-    {
+    public static void BeforeClass() {
         token = System.getProperty("token");
 
         OBJECT_MAPPER = new ObjectMapper();
@@ -57,7 +73,7 @@ public class TelegramBotOperationsTest {
 
     @Test(dependsOnMethods = {"getUpdatesTest"})
     public void sendMessageTest() throws IOException {
-        for (Update update: updates) {
+        for (Update update : updates) {
             SendMessage param = new SendMessage();
             param.setToken(token);
             param.setChatId(update.getMessage().getChat().getId().toString());

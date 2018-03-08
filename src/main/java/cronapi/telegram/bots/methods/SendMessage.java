@@ -3,7 +3,6 @@ package cronapi.telegram.bots.methods;
 import com.fasterxml.jackson.core.type.TypeReference;
 import cronapi.telegram.bots.models.Message;
 import cronapi.telegram.bots.models.ReplyMarkup;
-import cronapi.telegram.bots.models.User;
 
 import java.io.IOException;
 

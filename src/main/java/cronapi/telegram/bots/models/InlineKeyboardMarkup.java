@@ -1,7 +1,5 @@
 package cronapi.telegram.bots.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class InlineKeyboardMarkup implements ReplyMarkup {
