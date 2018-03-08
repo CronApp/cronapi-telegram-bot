@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class Method<T> {
-    protected static final ObjectMapper OBJECT_MAPPER;
+    static final ObjectMapper OBJECT_MAPPER;
     private static final Logger LOGGER = Logger.getLogger(Method.class.getName());
 
     static {

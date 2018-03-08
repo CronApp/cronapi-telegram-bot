@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import cronapi.telegram.bots.methods.GetMe;
 import cronapi.telegram.bots.methods.GetUpdates;
+import cronapi.telegram.bots.methods.SendMessage;
+import cronapi.telegram.bots.models.Message;
 import cronapi.telegram.bots.models.Update;
 import cronapi.telegram.bots.models.User;
 import org.testng.annotations.BeforeClass;
@@ -19,6 +21,7 @@ public class TelegramBotOperationsTest {
 
     private static String token;
     private static ObjectMapper OBJECT_MAPPER;
+    private List<Update> updates;
 
     @BeforeClass
     public static void BeforeClass()
@@ -37,7 +40,7 @@ public class TelegramBotOperationsTest {
     }
 
     @Test
-    public void GetMeTest() throws IOException {
+    public void getMeTest() throws IOException {
         GetMe param = new GetMe();
         param.setToken(token);
         User user = TelegramBotOperations.getMe(param);
@@ -45,11 +48,23 @@ public class TelegramBotOperationsTest {
     }
 
     @Test
-    public void GetUpdatesTest() throws IOException {
+    public void getUpdatesTest() throws IOException {
         GetUpdates param = new GetUpdates();
         param.setToken(token);
-        List<Update> messages = TelegramBotOperations.getUpdates(param);
-        System.out.println(OBJECT_MAPPER.writeValueAsString(messages));
+        updates = TelegramBotOperations.getUpdates(param);
+        System.out.println(OBJECT_MAPPER.writeValueAsString(updates));
+    }
+
+    @Test(dependsOnMethods = {"getUpdatesTest"})
+    public void sendMessageTest() throws IOException {
+        for (Update update: updates) {
+            SendMessage param = new SendMessage();
+            param.setToken(token);
+            param.setChatId(update.getMessage().getChat().getId().toString());
+            param.setText("Echoing " + update.getMessage().getText());
+            Message message = TelegramBotOperations.sendMessage(param);
+            System.out.println(OBJECT_MAPPER.writeValueAsString(message));
+        }
     }
 
 
