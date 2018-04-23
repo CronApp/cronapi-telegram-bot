@@ -6,7 +6,7 @@ import cronapi.telegram.bots.models.User;
 
 import java.io.IOException;
 
-public class GetMe extends Method<User> {
+public class GetMe extends JsonMethod<User> {
 
     @Override
     protected Response<User> readResponse(String content) throws IOException {

@@ -3,17 +3,18 @@ package cronapi.telegram.bots.methods;
 import com.fasterxml.jackson.core.type.TypeReference;
 import cronapi.telegram.bots.models.Message;
 import cronapi.telegram.bots.models.ReplyMarkup;
-
 import java.io.IOException;
 
-public class SendMessage extends JsonMethod<Message> {
+public class SendVoice extends JsonMethod<Message> {
+
     private String chatId;
-    private String text;
-    private String parseMode;
-    private Boolean disableWebPagePreview;
+    private String voice;
     private Boolean disableNotification;
     private Integer replyToMessageId;
     private ReplyMarkup replyMarkup;
+    private Integer duration;
+    private String caption;
+    private String parseMode;
 
     public String getChatId() {
         return chatId;
@@ -23,28 +24,12 @@ public class SendMessage extends JsonMethod<Message> {
         this.chatId = chatId;
     }
 
-    public String getText() {
-        return text;
+    public String getVoice() {
+        return voice;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getParseMode() {
-        return parseMode;
-    }
-
-    public void setParseMode(String parseMode) {
-        this.parseMode = parseMode;
-    }
-
-    public Boolean getDisableWebPagePreview() {
-        return disableWebPagePreview;
-    }
-
-    public void setDisableWebPagePreview(Boolean disableWebPagePreview) {
-        this.disableWebPagePreview = disableWebPagePreview;
+    public void setVoice(String voice) {
+        this.voice = voice;
     }
 
     public Boolean getDisableNotification() {
@@ -71,7 +56,30 @@ public class SendMessage extends JsonMethod<Message> {
         this.replyMarkup = replyMarkup;
     }
 
-    @Override
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
+
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public String getParseMode() {
+        return parseMode;
+    }
+
+    public void setParseMode(String parseMode) {
+        this.parseMode = parseMode;
+    }
+
     protected Response<Message> readResponse(String content) throws IOException {
         return OBJECT_MAPPER.readValue(content, new TypeReference<Response<Message>>() {
         });
