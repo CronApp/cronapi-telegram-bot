@@ -6,7 +6,7 @@ import cronapi.telegram.bots.models.Update;
 import java.io.IOException;
 import java.util.List;
 
-public class GetUpdates extends Method<List<Update>> {
+public class GetUpdates extends JsonMethod<List<Update>> {
     private Integer offset;
     private Integer limit;
     private Integer timeout;

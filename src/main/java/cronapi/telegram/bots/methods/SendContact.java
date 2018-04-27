@@ -3,14 +3,14 @@ package cronapi.telegram.bots.methods;
 import com.fasterxml.jackson.core.type.TypeReference;
 import cronapi.telegram.bots.models.Message;
 import cronapi.telegram.bots.models.ReplyMarkup;
-
 import java.io.IOException;
 
-public class SendMessage extends JsonMethod<Message> {
+public class SendContact extends JsonMethod<Message> {
+
     private String chatId;
-    private String text;
-    private String parseMode;
-    private Boolean disableWebPagePreview;
+    private String phoneNumber;
+    private String firstName;
+    private String lastName;
     private Boolean disableNotification;
     private Integer replyToMessageId;
     private ReplyMarkup replyMarkup;
@@ -23,28 +23,28 @@ public class SendMessage extends JsonMethod<Message> {
         this.chatId = chatId;
     }
 
-    public String getText() {
-        return text;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getParseMode() {
-        return parseMode;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setParseMode(String parseMode) {
-        this.parseMode = parseMode;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Boolean getDisableWebPagePreview() {
-        return disableWebPagePreview;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setDisableWebPagePreview(Boolean disableWebPagePreview) {
-        this.disableWebPagePreview = disableWebPagePreview;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Boolean getDisableNotification() {
@@ -71,7 +71,6 @@ public class SendMessage extends JsonMethod<Message> {
         this.replyMarkup = replyMarkup;
     }
 
-    @Override
     protected Response<Message> readResponse(String content) throws IOException {
         return OBJECT_MAPPER.readValue(content, new TypeReference<Response<Message>>() {
         });

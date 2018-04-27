@@ -36,7 +36,7 @@ class TelegramBotSession extends Thread {
                 List<Update> updates;
                 try {
                     updates = request.execute();
-                } catch (IOException | TelegramBotException e) {
+                } catch (IOException | BotException e) {
                     LOGGER.log(Level.SEVERE, e.getMessage(), e);
                     Thread.sleep(500);
                     updates = Collections.emptyList();

@@ -6,7 +6,7 @@
 
     <groupId>io.cronapp</groupId>
     <artifactId>cronapi-telegram-bot</artifactId>
-    <version>3.6.0.0</version>
+    <version>3.6.2</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -35,10 +35,14 @@
             <version>2.9.4</version>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.14.2</version>
-            <scope>test</scope>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.5</version>
         </dependency>
     </dependencies>
     <repositories>
