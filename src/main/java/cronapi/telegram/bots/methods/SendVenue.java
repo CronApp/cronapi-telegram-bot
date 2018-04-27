@@ -3,15 +3,17 @@ package cronapi.telegram.bots.methods;
 import com.fasterxml.jackson.core.type.TypeReference;
 import cronapi.telegram.bots.models.Message;
 import cronapi.telegram.bots.models.ReplyMarkup;
-
 import java.io.IOException;
 
-public class SendMessage extends JsonMethod<Message> {
+public class SendVenue extends JsonMethod<Message> {
+
     private String chatId;
-    private String text;
-    private String parseMode;
-    private Boolean disableWebPagePreview;
+    private Float latitude;
+    private Float longitude;
+    private String title;
     private Boolean disableNotification;
+    private String address;
+    private String foursquareId;
     private Integer replyToMessageId;
     private ReplyMarkup replyMarkup;
 
@@ -23,28 +25,28 @@ public class SendMessage extends JsonMethod<Message> {
         this.chatId = chatId;
     }
 
-    public String getText() {
-        return text;
+    public Float getLatitude() {
+        return latitude;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 
-    public String getParseMode() {
-        return parseMode;
+    public Float getLongitude() {
+        return longitude;
     }
 
-    public void setParseMode(String parseMode) {
-        this.parseMode = parseMode;
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
 
-    public Boolean getDisableWebPagePreview() {
-        return disableWebPagePreview;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDisableWebPagePreview(Boolean disableWebPagePreview) {
-        this.disableWebPagePreview = disableWebPagePreview;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Boolean getDisableNotification() {
@@ -53,6 +55,22 @@ public class SendMessage extends JsonMethod<Message> {
 
     public void setDisableNotification(Boolean disableNotification) {
         this.disableNotification = disableNotification;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFoursquareId() {
+        return foursquareId;
+    }
+
+    public void setFoursquareId(String foursquareId) {
+        this.foursquareId = foursquareId;
     }
 
     public Integer getReplyToMessageId() {
@@ -71,7 +89,6 @@ public class SendMessage extends JsonMethod<Message> {
         this.replyMarkup = replyMarkup;
     }
 
-    @Override
     protected Response<Message> readResponse(String content) throws IOException {
         return OBJECT_MAPPER.readValue(content, new TypeReference<Response<Message>>() {
         });
